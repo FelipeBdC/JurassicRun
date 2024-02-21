@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://crpj1gbn4gunj"]
+
+[ext_resource type="Script" path="res://components/mob/motion_handler/motion_handler.gd" id="1_xvhud"]
+
+[node name="MotionHandler" type="Node"]
+script = ExtResource("1_xvhud")

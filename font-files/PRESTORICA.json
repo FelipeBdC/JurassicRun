@@ -1,0 +1,47 @@
+{
+	"$baseURI": "https://yal.cc/r/20/pixelfont/",
+	"$version": "1.0",
+	"in-glyphs": [
+		"ABCDEF",
+		"GHIJKL",
+		"MNOPQR",
+		"STUVWX",
+		"YZ0123",
+		"456789"
+	],
+	"glyph-color": "auto",
+	"in-kerning": [
+		""
+	],
+	"glyph-width": 7,
+	"glyph-height": 9,
+	"glyph-ofs-x": null,
+	"glyph-ofs-y": null,
+	"glyph-sep-x": 0,
+	"glyph-sep-y": null,
+	"glyph-base-x": 1,
+	"glyph-baseline": 6,
+	"glyph-spacing": 1,
+	"font-is-mono": false,
+	"font-em-square": 1024,
+	"font-line-gap": 0,
+	"font-ascend": 768,
+	"font-descend": -256,
+	"font-px-size": 128,
+	"contour-type": "pixel",
+	"font-type": "ttf",
+	"font-name": "PRESTORICA",
+	"font-author": "Felipe Souza",
+	"font-copy": "(c)",
+	"font-version": "1.0",
+	"font-desc": "dino game go BRRR",
+	"font-license": "",
+	"font-license-url": "",
+	"font-sample-text": "RAWR",
+	"font-preview-text": [
+		"THE QUICK BROWN FOX JUMPS",
+		"OVER THE LAZY DOG",
+		"",
+		"1 2 3 4 5 6 7 8 9 10"
+	]
+}

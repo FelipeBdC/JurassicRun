@@ -1,0 +1,73 @@
+[gd_scene load_steps=17 format=3 uid="uid://d3stlbsqmy77c"]
+
+[ext_resource type="Script" path="res://game_manager.gd" id="1_3ve62"]
+[ext_resource type="PackedScene" uid="uid://dajkk66mk7fdy" path="res://levels/level_1/level_1.tscn" id="2_1r3n8"]
+[ext_resource type="PackedScene" uid="uid://bo8ukxr6krqtg" path="res://ui/ui_manager.tscn" id="4_s10ed"]
+[ext_resource type="PackedScene" uid="uid://pofxnk2fs0qy" path="res://ui/layouts/main_menu/main_menu.tscn" id="6_v7lx2"]
+[ext_resource type="PackedScene" uid="uid://dvtcwv8xabkjg" path="res://ui/layouts/pause_menu/pause_menu.tscn" id="7_acc4f"]
+[ext_resource type="PackedScene" uid="uid://fgp4iyaofpm2" path="res://ui/layouts/resume_delay/resume_delay.tscn" id="8_6btga"]
+[ext_resource type="PackedScene" uid="uid://cdblgfhfvp5xa" path="res://ui/layouts/hud/hud.tscn" id="8_asirr"]
+[ext_resource type="PackedScene" uid="uid://bmjte81qf1hr6" path="res://components/general/event_receiver/event_receiver.tscn" id="8_hqlhq"]
+[ext_resource type="PackedScene" uid="uid://m8ngq0tr2cmi" path="res://ui/layouts/game_over_screen/game_over_screen.tscn" id="8_myij0"]
+[ext_resource type="PackedScene" uid="uid://cubwynqn6sceh" path="res://ui/layouts/settings_menu/settings_menu.tscn" id="9_3kb44"]
+[ext_resource type="PackedScene" uid="uid://xuhbuipoyd14" path="res://components/general/ui_changer/ui_changer.tscn" id="10_746ep"]
+[ext_resource type="PackedScene" uid="uid://bb253osjuyukp" path="res://components/general/vibrator/vibrator.tscn" id="12_a2yyc"]
+[ext_resource type="PackedScene" uid="uid://co4ejyp0f4khe" path="res://components/ui/button_manager/button_manager.tscn" id="13_f5ioq"]
+[ext_resource type="AudioStream" uid="uid://bc8f85kqy3xv4" path="res://ui/sounds/button_click.ogg" id="14_vk1g4"]
+[ext_resource type="PackedScene" uid="uid://36a0dsgxb34o" path="res://components/level/level_sound_manager/level_sound_manager.tscn" id="15_hmiww"]
+[ext_resource type="AudioStream" uid="uid://bqra7qcatxfq3" path="res://ui/sounds/special_button_click.ogg" id="15_i75g4"]
+
+[node name="Game" type="Node2D"]
+
+[node name="GameManager" type="Node2D" parent="."]
+script = ExtResource("1_3ve62")
+
+[node name="Level1" parent="GameManager" instance=ExtResource("2_1r3n8")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(88, 144)
+
+[node name="UIContainer" type="CanvasLayer" parent="Camera2D"]
+
+[node name="UIManager" parent="Camera2D/UIContainer" instance=ExtResource("4_s10ed")]
+startup_interface = ExtResource("6_v7lx2")
+interfaces = {
+"game_over_menu": ExtResource("8_myij0"),
+"hud": ExtResource("8_asirr"),
+"main_menu": ExtResource("6_v7lx2"),
+"pause_menu": ExtResource("7_acc4f"),
+"resume_delay": ExtResource("8_6btga"),
+"settings_menu": ExtResource("9_3kb44")
+}
+
+[node name="PlayPressedListener" parent="." instance=ExtResource("8_hqlhq")]
+event_name = "play_button_pressed"
+
+[node name="HomePressedListener" parent="." instance=ExtResource("8_hqlhq")]
+event_name = "home_button_pressed"
+
+[node name="PlayerCollidedListener" parent="." instance=ExtResource("8_hqlhq")]
+event_type = "game_events"
+event_name = "player_collided"
+
+[node name="UIChanger" parent="PlayerCollidedListener" instance=ExtResource("10_746ep")]
+interface_name = "game_over_menu"
+fading = false
+
+[node name="Vibrator" parent="PlayerCollidedListener" instance=ExtResource("12_a2yyc")]
+duration_ms = 200
+
+[node name="ButtonManager" parent="." instance=ExtResource("13_f5ioq")]
+button_click_sound = ExtResource("14_vk1g4")
+special_button_click_sound = ExtResource("15_i75g4")
+
+[node name="UISoundManager" parent="." instance=ExtResource("15_hmiww")]
+id = 1
+
+[connection signal="ready" from="GameManager" to="GameManager" method="_on_ready"]
+[connection signal="ui_changed" from="Camera2D/UIContainer/UIManager" to="ButtonManager" method="connect_buttons"]
+[connection signal="event_received" from="PlayPressedListener" to="GameManager" method="start_game" unbinds=1]
+[connection signal="event_received" from="HomePressedListener" to="GameManager" method="end_game" unbinds=1]
+[connection signal="event_received" from="PlayerCollidedListener" to="GameManager" method="pause_level" unbinds=1]
+[connection signal="event_received" from="PlayerCollidedListener" to="PlayerCollidedListener/UIChanger" method="change_ui" unbinds=1]
+[connection signal="event_received" from="PlayerCollidedListener" to="PlayerCollidedListener/Vibrator" method="vibrate" unbinds=1]

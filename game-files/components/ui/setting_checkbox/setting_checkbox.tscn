@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://xktftkiygp6l"]
+
+[ext_resource type="Script" path="res://components/ui/setting_checkbox/setting_checkbox.gd" id="1_5248e"]
+
+[node name="SettingCheckbox" type="CheckButton"]
+custom_minimum_size = Vector2(100, 0)
+size_flags_horizontal = 4
+focus_mode = 0
+button_pressed = true
+text = "PARTICLES"
+flat = true
+script = ExtResource("1_5248e")

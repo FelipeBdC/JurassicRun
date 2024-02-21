@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://2vmhyih62ssg"]
+
+[ext_resource type="Shader" path="res://shaders/scroll.gdshader" id="1_5n0i4"]
+
+[resource]
+shader = ExtResource("1_5n0i4")
+shader_parameter/scroll = true
+shader_parameter/speed = 0.5
+shader_parameter/scroll_amount = 0.0

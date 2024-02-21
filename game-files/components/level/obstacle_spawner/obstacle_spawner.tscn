@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://dabcgxmsvqifl"]
+
+[ext_resource type="Script" path="res://components/level/obstacle_spawner/obstacle_spawner.gd" id="1_6pfe0"]
+[ext_resource type="PackedScene" uid="uid://bdaqn7h6moeq" path="res://components/level/spawner/spawner.tscn" id="1_ftuyy"]
+[ext_resource type="PackedScene" uid="uid://ppntko5hn7kt" path="res://objects/cactus/cactus.tscn" id="3_dedq8"]
+[ext_resource type="PackedScene" uid="uid://ca6arv8josf82" path="res://objects/tall_cactus/tall_cactus.tscn" id="4_4vfi3"]
+
+[node name="ObstacleSpawner" type="Node2D" node_paths=PackedStringArray("spawner")]
+script = ExtResource("1_6pfe0")
+spawner = NodePath("Spawner")
+
+[node name="Spawner" parent="." instance=ExtResource("1_ftuyy")]
+node_scenes = Array[PackedScene]([ExtResource("3_dedq8"), ExtResource("4_4vfi3")])
+spawn_delay_min = 2.0
+spawn_delay_max = 2.0
+
+[connection signal="node_spawned" from="Spawner" to="." method="_on_spawner_node_spawned"]

@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://bih1rik1oswoo"]
+
+[ext_resource type="Material" uid="uid://cvgsjwcw0jorr" path="res://classes/hold_button/hold_button.tres" id="1_8o7d1"]
+[ext_resource type="Script" path="res://classes/hold_button/hold_button.gd" id="2_4rk7g"]
+
+[node name="HoldButton" type="Button"]
+material = ExtResource("1_8o7d1")
+offset_right = 64.0
+offset_bottom = 16.0
+focus_mode = 0
+text = "TEST"
+script = ExtResource("2_4rk7g")

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5h0c3vuj0n0r"]
+
+[ext_resource type="Script" path="res://components/mob/jump_handler/jump_sensor.gd" id="1_ap455"]
+
+[node name="JumpSensor" type="Node"]
+script = ExtResource("1_ap455")

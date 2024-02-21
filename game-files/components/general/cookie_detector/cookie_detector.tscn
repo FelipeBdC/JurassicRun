@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cyp21ggbib2hn"]
+
+[ext_resource type="Script" path="res://components/general/cookie_detector/cookie_detector.gd" id="1_et7kk"]
+
+[node name="CookieDetector" type="Node"]
+script = ExtResource("1_et7kk")

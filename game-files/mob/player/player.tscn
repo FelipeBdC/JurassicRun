@@ -1,0 +1,273 @@
+[gd_scene load_steps=23 format=3 uid="uid://xf4rma3osyoi"]
+
+[ext_resource type="Script" path="res://mob/player/player.gd" id="1_l0ato"]
+[ext_resource type="Texture2D" uid="uid://dbc3sqjguf0i2" path="res://mob/player/dinosaurs/raptor/raptor.png" id="1_qbggr"]
+[ext_resource type="Script" path="res://mob/player/player_visuals.gd" id="3_m2ra6"]
+[ext_resource type="PackedScene" uid="uid://e470se77rwjd" path="res://particles/land/land_particles.tscn" id="4_4qkqy"]
+[ext_resource type="PackedScene" uid="uid://c7vnf3loghiee" path="res://components/mob/hurtbox/hurtbox.tscn" id="4_madng"]
+[ext_resource type="PackedScene" uid="uid://c80gbhl4s1s3r" path="res://components/general/particle_emitter/particle_emitter.tscn" id="4_ungp7"]
+[ext_resource type="PackedScene" uid="uid://cy3ytowwb64wf" path="res://components/general/event_emitter/event_emitter.tscn" id="5_65sh1"]
+[ext_resource type="PackedScene" uid="uid://bva6p0jihi7hp" path="res://components/level/level_sound_player/level_sound_player.tscn" id="6_hi7yf"]
+[ext_resource type="AudioStream" uid="uid://deuum8oxe4dbi" path="res://mob/player/sounds/jump.ogg" id="7_75kpu"]
+[ext_resource type="AudioStream" uid="uid://c75x32l1gtcw7" path="res://mob/player/sounds/fall.ogg" id="8_gy3tb"]
+[ext_resource type="AudioStream" uid="uid://dhetavb8e2kvc" path="res://mob/player/sounds/step_0.ogg" id="9_jsi5a"]
+[ext_resource type="AudioStream" uid="uid://vk256rpjkuxw" path="res://mob/player/sounds/step_1.ogg" id="10_m5le5"]
+
+[sub_resource type="Animation" id="Animation_ruta8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ftd7k"]
+resource_name = "die"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [15]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:offset")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-1, 0), Vector2(1, 0), Vector2(-1, 0), Vector2(1, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_xvi22"]
+resource_name = "jump_stage_0"
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [12]
+}
+
+[sub_resource type="Animation" id="Animation_vl540"]
+resource_name = "jump_stage_1"
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [13]
+}
+
+[sub_resource type="Animation" id="Animation_76grc"]
+resource_name = "run"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 11]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Step0SFX")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_sound"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Step1SFX")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_sound"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_b1es1"]
+resource_name = "watch"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.7, 1.8, 1.9, 2, 2.2, 2.4, 2.6, 2.7, 2.8, 2.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 0, 4, 5, 6, 7]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_62oe7"]
+_data = {
+"RESET": SubResource("Animation_ruta8"),
+"die": SubResource("Animation_ftd7k"),
+"jump_stage_0": SubResource("Animation_xvi22"),
+"jump_stage_1": SubResource("Animation_vl540"),
+"run": SubResource("Animation_76grc"),
+"watch": SubResource("Animation_b1es1")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nupdn"]
+radius = 4.0
+height = 8.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_542mw"]
+size = Vector2(4, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_haywf"]
+size = Vector2(24, 24)
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("ground_check")]
+collision_mask = 2
+script = ExtResource("1_l0ato")
+ground_check = NodePath("GroundCheck")
+jump_height = 40.0
+jump_time_to_peak = 0.3
+jump_time_to_fall = 0.3
+
+[node name="Sprite2D" type="Sprite2D" parent="." node_paths=PackedStringArray("animation_player")]
+position = Vector2(0, -16)
+texture = ExtResource("1_qbggr")
+offset = Vector2(1, 0)
+hframes = 16
+frame = 2
+script = ExtResource("3_m2ra6")
+animation_player = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D" groups=["pausables"]]
+process_mode = 3
+libraries = {
+"": SubResource("AnimationLibrary_62oe7")
+}
+autoplay = "watch"
+
+[node name="LandParticle" parent="Sprite2D" instance=ExtResource("4_ungp7")]
+position = Vector2(8, 16)
+particle_scene = ExtResource("4_4qkqy")
+
+[node name="Hurtbox" parent="." instance=ExtResource("4_madng")]
+position = Vector2(0, -12)
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, 3)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_nupdn")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(11, -1)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_542mw")
+
+[node name="HitEventEmitter" parent="Hurtbox" instance=ExtResource("5_65sh1")]
+event_type = "game_events"
+event_name = "player_collided"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, -12)
+shape = SubResource("RectangleShape2D_haywf")
+
+[node name="GroundCheck" type="RayCast2D" parent="."]
+target_position = Vector2(0, 1)
+collision_mask = 2
+hit_from_inside = true
+
+[node name="JumpCooldown" type="Timer" parent="."]
+one_shot = true
+
+[node name="JumpSFX" parent="." instance=ExtResource("6_hi7yf")]
+stream = ExtResource("7_75kpu")
+bus = "SFX"
+volume = 0.8
+
+[node name="FallSFX" parent="." instance=ExtResource("6_hi7yf")]
+stream = ExtResource("8_gy3tb")
+bus = "SFX"
+volume = 0.5
+
+[node name="Step0SFX" parent="." instance=ExtResource("6_hi7yf")]
+stream = ExtResource("9_jsi5a")
+bus = "SFX"
+volume = 0.06
+
+[node name="Step1SFX" parent="." instance=ExtResource("6_hi7yf")]
+stream = ExtResource("10_m5le5")
+bus = "SFX"
+volume = 0.06
+
+[connection signal="player_jumped" from="." to="JumpSFX" method="play_sound"]
+[connection signal="player_landed" from="." to="Sprite2D/LandParticle" method="emit"]
+[connection signal="player_landed" from="." to="FallSFX" method="play_sound"]
+[connection signal="velocity_updated" from="." to="Sprite2D" method="_on_player_velocity_updated"]
+[connection signal="hurt" from="Hurtbox" to="Sprite2D" method="_on_hurtbox_hurt"]
+[connection signal="hurt" from="Hurtbox" to="Hurtbox/HitEventEmitter" method="emit" unbinds=1]

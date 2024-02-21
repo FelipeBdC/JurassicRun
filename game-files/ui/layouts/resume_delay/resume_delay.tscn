@@ -1,0 +1,56 @@
+[gd_scene load_steps=4 format=3 uid="uid://fgp4iyaofpm2"]
+
+[ext_resource type="Script" path="res://ui/layouts/resume_delay/TimerLabel.gd" id="1_any32"]
+[ext_resource type="PackedScene" uid="uid://b8vmj1mai1f5j" path="res://components/general/game_pauser/game_pauser.tscn" id="2_x73k5"]
+[ext_resource type="PackedScene" uid="uid://xuhbuipoyd14" path="res://components/general/ui_changer/ui_changer.tscn" id="3_bjpjb"]
+
+[node name="ResumeDelay" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -50.0
+offset_right = 5.0
+offset_bottom = -38.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+
+[node name="TimerLabel" type="Label" parent="HBoxContainer/PanelContainer" node_paths=PackedStringArray("timer")]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "0"
+horizontal_alignment = 1
+script = ExtResource("1_any32")
+timer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="HBoxContainer/PanelContainer/TimerLabel"]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[node name="GamePauser" parent="HBoxContainer/PanelContainer/TimerLabel" instance=ExtResource("2_x73k5")]
+
+[node name="UIChanger" parent="HBoxContainer/PanelContainer/TimerLabel" instance=ExtResource("3_bjpjb")]
+interface_name = "hud"
+fade_in_speed = 0.2
+fade_out_speed = 0.2
+
+[connection signal="timeout" from="HBoxContainer/PanelContainer/TimerLabel/Timer" to="HBoxContainer/PanelContainer/TimerLabel/GamePauser" method="unpause_level"]
+[connection signal="timeout" from="HBoxContainer/PanelContainer/TimerLabel/Timer" to="HBoxContainer/PanelContainer/TimerLabel/UIChanger" method="change_ui"]

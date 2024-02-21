@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://e470se77rwjd"]
+
+[ext_resource type="PackedScene" uid="uid://dbjwrlv5xdjwc" path="res://components/general/generic_motion/generic_motion.tscn" id="1_lcf25"]
+
+[sub_resource type="Curve" id="Curve_4of8x"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.686469, 0.690066), -1.4161, -1.4161, 0, 0, Vector2(1, 0), -3.49487, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_hdoa1"]
+curve = SubResource("Curve_4of8x")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3i86l"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 90.0
+initial_velocity_min = 60.0
+initial_velocity_max = 60.0
+gravity = Vector3(0, 98, 0)
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_hdoa1")
+
+[node name="GPUParticles2D" type="GPUParticles2D"]
+z_index = 1
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_3i86l")
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.93
+fixed_fps = 0
+local_coords = true
+
+[node name="GenericMotion" parent="." node_paths=PackedStringArray("target") instance=ExtResource("1_lcf25")]
+target = NodePath("..")
+speed = 140
+direction = Vector2(-1, 0)

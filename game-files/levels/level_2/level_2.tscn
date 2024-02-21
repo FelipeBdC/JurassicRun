@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://duf2b37b3h70c"]
+
+[ext_resource type="PackedScene" uid="uid://xf4rma3osyoi" path="res://mob/player/player.tscn" id="1_e3k7n"]
+[ext_resource type="PackedScene" uid="uid://yiuy4r8rhymv" path="res://components/level/camera/camera.tscn" id="2_1wnb1"]
+[ext_resource type="PackedScene" uid="uid://bdaqn7h6moeq" path="res://components/level/spawner/spawner.tscn" id="2_v4nby"]
+[ext_resource type="PackedScene" uid="uid://ppntko5hn7kt" path="res://objects/cactus/cactus.tscn" id="3_r3g1k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gjrjd"]
+size = Vector2(144, 64)
+
+[node name="Level2" type="Node2D"]
+
+[node name="Floor" type="StaticBody2D" parent="."]
+collision_layer = 3
+
+[node name="Ground" type="Polygon2D" parent="Floor"]
+color = Color(0.360784, 1, 0, 1)
+polygon = PackedVector2Array(0, 192, 176, 192, 176, 288, 0, 288)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+position = Vector2(72, 224)
+shape = SubResource("RectangleShape2D_gjrjd")
+
+[node name="Objects" type="Node2D" parent="."]
+
+[node name="Player" parent="Objects" instance=ExtResource("1_e3k7n")]
+position = Vector2(32, 192)
+
+[node name="Spawner" parent="Objects" instance=ExtResource("2_v4nby")]
+position = Vector2(176, 192)
+node_scene = ExtResource("3_r3g1k")
+spawn_delay = 2.0
+
+[node name="Camera" parent="." instance=ExtResource("2_1wnb1")]
+position = Vector2(88, 144)

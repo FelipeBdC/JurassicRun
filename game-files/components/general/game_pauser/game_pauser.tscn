@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8vmj1mai1f5j"]
+
+[ext_resource type="Script" path="res://components/general/game_pauser/game_pauser.gd" id="1_03kf8"]
+
+[node name="GamePauser" type="Node"]
+script = ExtResource("1_03kf8")

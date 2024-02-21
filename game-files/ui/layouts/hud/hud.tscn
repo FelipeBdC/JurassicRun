@@ -1,0 +1,186 @@
+[gd_scene load_steps=15 format=3 uid="uid://cdblgfhfvp5xa"]
+
+[ext_resource type="Texture2D" uid="uid://dnt3oexmmpcc" path="res://ui/theme/icons/pause.png" id="1_7o7y3"]
+[ext_resource type="Script" path="res://ui/layouts/hud/hud.gd" id="1_67brk"]
+[ext_resource type="Script" path="res://ui/layouts/hud/score_label.gd" id="1_p3pbf"]
+[ext_resource type="AudioStream" uid="uid://irlgepn808id" path="res://ui/sounds/reach_score_target.ogg" id="2_6t4cj"]
+[ext_resource type="AudioStream" uid="uid://g3jqxx1tyden" path="res://ui/sounds/reach_highscore.ogg" id="4_5t8qu"]
+[ext_resource type="PackedScene" uid="uid://xuhbuipoyd14" path="res://components/general/ui_changer/ui_changer.tscn" id="4_lghah"]
+[ext_resource type="PackedScene" uid="uid://b8vmj1mai1f5j" path="res://components/general/game_pauser/game_pauser.tscn" id="4_myh0b"]
+[ext_resource type="Script" path="res://classes/single_press_button.gd" id="4_pod70"]
+
+[sub_resource type="Animation" id="Animation_a70tt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_vfab6"]
+resource_name = "blink"
+length = 1.05
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1.05),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ReachScoreTarget:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_572x7"]
+resource_name = "reach_highscore"
+length = 1.05
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1.05),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 0, 1), Color(1, 1, 1, 0), Color(1, 1, 0, 1), Color(1, 1, 1, 0), Color(1, 1, 0, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ReachHighscore:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8wjjn"]
+_data = {
+"RESET": SubResource("Animation_a70tt"),
+"blink": SubResource("Animation_vfab6"),
+"reach_highscore": SubResource("Animation_572x7")
+}
+
+[sub_resource type="InputEventKey" id="InputEventKey_sal4y"]
+device = -1
+keycode = 4194305
+
+[sub_resource type="Shortcut" id="Shortcut_nubch"]
+events = [SubResource("InputEventKey_sal4y")]
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_67brk")
+max_size = Vector2(176, 192)
+original_size = Vector2(176, 176)
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -50.0
+offset_right = 5.0
+offset_bottom = -38.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+
+[node name="ScoreLabel" type="Label" parent="HBoxContainer2/PanelContainer" node_paths=PackedStringArray("animation_player")]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("1_p3pbf")
+animation_player = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HBoxContainer2/PanelContainer/ScoreLabel"]
+libraries = {
+"": SubResource("AnimationLibrary_8wjjn")
+}
+
+[node name="ReachScoreTarget" type="AudioStreamPlayer" parent="HBoxContainer2/PanelContainer/ScoreLabel"]
+stream = ExtResource("2_6t4cj")
+volume_db = -6.0
+bus = &"UI"
+
+[node name="ReachHighscore" type="AudioStreamPlayer" parent="HBoxContainer2/PanelContainer/ScoreLabel"]
+stream = ExtResource("4_5t8qu")
+volume_db = -6.0
+bus = &"UI"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = -20.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+alignment = 1
+
+[node name="PauseButton" type="Button" parent="HBoxContainer" groups=["buttons"]]
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+shortcut = SubResource("Shortcut_nubch")
+shortcut_in_tooltip = false
+icon = ExtResource("1_7o7y3")
+script = ExtResource("4_pod70")
+
+[node name="UIChanger" parent="HBoxContainer/PauseButton" instance=ExtResource("4_lghah")]
+interface_name = "pause_menu"
+fade_in_speed = 0.2
+fade_out_speed = 0.0
+
+[node name="GamePauser" parent="HBoxContainer/PauseButton" instance=ExtResource("4_myh0b")]
+
+[connection signal="pressed" from="HBoxContainer/PauseButton" to="HBoxContainer/PauseButton/UIChanger" method="change_ui"]
+[connection signal="pressed" from="HBoxContainer/PauseButton" to="HBoxContainer/PauseButton/GamePauser" method="pause_level"]

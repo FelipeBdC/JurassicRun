@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://csktt52k1wvt"]
+
+[ext_resource type="Script" path="res://components/level/score_counter/score_counter.gd" id="1_tkcuh"]
+
+[node name="ScoreCounter" type="Node" node_paths=PackedStringArray("score_timer")]
+script = ExtResource("1_tkcuh")
+score_timer = NodePath("ScoreTimer")
+
+[node name="ScoreTimer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]

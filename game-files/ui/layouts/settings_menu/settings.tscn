@@ -1,0 +1,94 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjmixu1jjcw6q"]
+
+[ext_resource type="PackedScene" uid="uid://demstfe56rj0o" path="res://components/ui/audio_slider/audio_slider.tscn" id="1_vchha"]
+[ext_resource type="PackedScene" uid="uid://xktftkiygp6l" path="res://components/ui/setting_checkbox/setting_checkbox.tscn" id="2_yw8ts"]
+
+[node name="Settings" type="VBoxContainer"]
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_constants/separation = 2
+
+[node name="AudioTitle" type="PanelContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label5" type="Label" parent="AudioTitle"]
+layout_mode = 2
+text = "AUDIO"
+horizontal_alignment = 1
+
+[node name="MarginContainer4" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_bottom = 4
+
+[node name="Label2" type="Label" parent="."]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "SOUND EFFECTS"
+
+[node name="SoundEffectsVolume" parent="." instance=ExtResource("1_vchha")]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+bus = "SFX"
+
+[node name="Label3" type="Label" parent="."]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "UI SOUNDS"
+
+[node name="UISoundsVolume" parent="." instance=ExtResource("1_vchha")]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+bus = "UI"
+
+[node name="Label4" type="Label" parent="."]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "MUSIC"
+
+[node name="MusicVolume" parent="." instance=ExtResource("1_vchha")]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+bus = "Music"
+
+[node name="MarginContainer5" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_bottom = 4
+
+[node name="VisualsTitle" type="PanelContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label5" type="Label" parent="VisualsTitle"]
+layout_mode = 2
+text = "VISUALS"
+horizontal_alignment = 1
+
+[node name="MarginContainer7" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_bottom = 4
+
+[node name="ParticlesCheckbox" parent="." groups=["buttons"] instance=ExtResource("2_yw8ts")]
+layout_mode = 2
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+section = "graphics"
+key = "particles"
+
+[node name="MarginContainer8" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="ShowHudCheckbox" parent="." groups=["buttons"] instance=ExtResource("2_yw8ts")]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "SHOW HUD"
+section = "graphics"
+key = "show_hud"
+
+[node name="MarginContainer6" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_bottom = 8

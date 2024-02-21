@@ -1,0 +1,20 @@
+[gd_scene load_steps=6 format=3 uid="uid://cn80ujr80m3nh"]
+
+[ext_resource type="Texture2D" uid="uid://ud082e06yooh" path="res://objects/background_decorations/cactus_1.png" id="1_4p8yg"]
+[ext_resource type="Script" path="res://classes/randomized_sprite.gd" id="2_g6e83"]
+[ext_resource type="Texture2D" uid="uid://dydiqqm4cexlv" path="res://objects/background_decorations/cactus_0.png" id="3_5k3gg"]
+[ext_resource type="Texture2D" uid="uid://bw5wvq7b3e688" path="res://objects/background_decorations/cactus_2.png" id="4_yfs3n"]
+[ext_resource type="PackedScene" uid="uid://dbjwrlv5xdjwc" path="res://components/general/generic_motion/generic_motion.tscn" id="5_jure1"]
+
+[node name="BackgroundDecoration" type="Node2D"]
+
+[node name="RandomizedSprite" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
+texture = ExtResource("1_4p8yg")
+script = ExtResource("2_g6e83")
+sprites = Array[Texture]([ExtResource("3_5k3gg"), ExtResource("1_4p8yg"), ExtResource("4_yfs3n")])
+
+[node name="GenericMotion" parent="." node_paths=PackedStringArray("target") instance=ExtResource("5_jure1")]
+target = NodePath("..")
+speed = 20
+direction = Vector2(-1, 0)

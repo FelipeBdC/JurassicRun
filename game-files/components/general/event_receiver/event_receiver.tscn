@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmjte81qf1hr6"]
+
+[ext_resource type="Script" path="res://components/general/event_receiver/event_receiver.gd" id="1_4t3e2"]
+
+[node name="EventReceiver" type="Node"]
+script = ExtResource("1_4t3e2")

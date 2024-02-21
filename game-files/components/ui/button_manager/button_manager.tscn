@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://co4ejyp0f4khe"]
+
+[ext_resource type="Script" path="res://components/ui/button_manager/button_manager.gd" id="1_sj8pg"]
+
+[node name="ButtonManager" type="Node"]
+script = ExtResource("1_sj8pg")

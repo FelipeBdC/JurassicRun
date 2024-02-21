@@ -1,0 +1,270 @@
+[gd_scene load_steps=33 format=3 uid="uid://dajkk66mk7fdy"]
+
+[ext_resource type="Texture2D" uid="uid://cavotopeyojkl" path="res://levels/level_1/sky.png" id="1_325xm"]
+[ext_resource type="PackedScene" uid="uid://xf4rma3osyoi" path="res://mob/player/player.tscn" id="1_ensg2"]
+[ext_resource type="Texture2D" uid="uid://bvc1iqkbc137d" path="res://levels/level_1/ground.png" id="1_nd7tx"]
+[ext_resource type="PackedScene" uid="uid://cfo6ulnshtyxw" path="res://components/level/floor/floor.tscn" id="2_b8df3"]
+[ext_resource type="PackedScene" uid="uid://bdaqn7h6moeq" path="res://components/level/spawner/spawner.tscn" id="2_gag1w"]
+[ext_resource type="Texture2D" uid="uid://dmp4hbtp6y3tx" path="res://levels/level_1/dunes.png" id="2_ixgfm"]
+[ext_resource type="PackedScene" uid="uid://ppntko5hn7kt" path="res://objects/cactus/cactus.tscn" id="3_kchot"]
+[ext_resource type="Script" path="res://classes/scrolling_texture.gd" id="4_ptapr"]
+[ext_resource type="Texture2D" uid="uid://528ev3xyk8pe" path="res://levels/level_1/decorations.png" id="5_a17d4"]
+[ext_resource type="Texture2D" uid="uid://dq56i2r7bm8uy" path="res://levels/level_1/palm_trees.png" id="5_lrypa"]
+[ext_resource type="Texture2D" uid="uid://txwata7ffw1m" path="res://levels/level_1/clouds_0.png" id="6_phnxg"]
+[ext_resource type="Texture2D" uid="uid://se0w5ujywoxu" path="res://levels/level_1/clouds_1.png" id="6_xc1vj"]
+[ext_resource type="PackedScene" uid="uid://ca6arv8josf82" path="res://objects/tall_cactus/tall_cactus.tscn" id="7_ooh14"]
+[ext_resource type="Script" path="res://particles/particle_controller.gd" id="8_072ta"]
+[ext_resource type="PackedScene" uid="uid://dabcgxmsvqifl" path="res://components/level/obstacle_spawner/obstacle_spawner.tscn" id="11_46f8q"]
+[ext_resource type="PackedScene" uid="uid://csktt52k1wvt" path="res://components/level/score_counter/score_counter.tscn" id="12_k5rit"]
+[ext_resource type="PackedScene" uid="uid://36a0dsgxb34o" path="res://components/level/level_sound_manager/level_sound_manager.tscn" id="12_ptls3"]
+[ext_resource type="PackedScene" uid="uid://bx0msmjwom18d" path="res://components/level/particle_manager/particle_manager.tscn" id="13_bfis1"]
+[ext_resource type="PackedScene" uid="uid://2vtnxjv8f1nw" path="res://components/level/music_manager/music_manager.tscn" id="18_8jsjs"]
+[ext_resource type="AudioStream" uid="uid://dknjmtqp3g1jg" path="res://levels/level_1/music/dunes.ogg" id="19_wi8jb"]
+
+[sub_resource type="Shader" id="Shader_bwilq"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+
+uniform bool scroll = true;
+uniform float speed = 0.5;
+uniform float scroll_amount = 0.0;
+
+void fragment() {
+	if (scroll) {
+		vec4 displaced_color = texture(TEXTURE, vec2(UV.x + scroll_amount * speed, UV.y));
+		COLOR = displaced_color;
+	}
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l8nj6"]
+shader = SubResource("Shader_bwilq")
+shader_parameter/scroll = true
+shader_parameter/speed = 0.5
+shader_parameter/scroll_amount = 0.0
+
+[sub_resource type="Shader" id="Shader_2bwvr"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+
+uniform bool scroll = true;
+uniform float speed = 0.5;
+uniform float scroll_amount = 0.0;
+
+void fragment() {
+	if (scroll) {
+		vec4 displaced_color = texture(TEXTURE, vec2(UV.x + scroll_amount * speed, UV.y));
+		COLOR = displaced_color;
+	}
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h6kdr"]
+shader = SubResource("Shader_2bwvr")
+shader_parameter/scroll = true
+shader_parameter/speed = 0.5
+shader_parameter/scroll_amount = 0.0
+
+[sub_resource type="Shader" id="Shader_xqk4q"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+
+uniform bool scroll = true;
+uniform float speed = 0.5;
+uniform float scroll_amount = 0.0;
+
+void fragment() {
+	
+	if (scroll) {
+		vec4 displaced_color = texture(TEXTURE, vec2(UV.x + scroll_amount * speed, UV.y));
+		COLOR = displaced_color;
+	}
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dlv05"]
+shader = SubResource("Shader_xqk4q")
+shader_parameter/scroll = true
+shader_parameter/speed = 0.5
+shader_parameter/scroll_amount = 0.0
+
+[sub_resource type="Shader" id="Shader_xt3pp"]
+code = "shader_type canvas_item;
+
+uniform bool scroll = true;
+uniform float speed = 0.5;
+uniform float scroll_amount = 0.0;
+
+void fragment() {
+	if (scroll) {
+		vec4 displaced_color = texture(TEXTURE, vec2(UV.x + scroll_amount * speed, UV.y));
+		COLOR = displaced_color;
+	}
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ni5h7"]
+shader = SubResource("Shader_xt3pp")
+shader_parameter/scroll = true
+shader_parameter/speed = 0.5
+shader_parameter/scroll_amount = 20.0
+
+[sub_resource type="Shader" id="Shader_yl84p"]
+code = "shader_type canvas_item;
+
+uniform bool scroll = true;
+uniform float speed = 0.5;
+uniform float scroll_amount = 0.0;
+
+void fragment() {
+	if (scroll) {
+		vec4 displaced_color = texture(TEXTURE, vec2(UV.x + scroll_amount * speed, UV.y));
+		COLOR = displaced_color;
+	}
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ovumd"]
+shader = SubResource("Shader_yl84p")
+shader_parameter/scroll = true
+shader_parameter/speed = 0.5
+shader_parameter/scroll_amount = 0.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4iyv8"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 8, 1)
+angle_min = -392.4
+angle_max = 593.8
+direction = Vector3(-1, 0, 0)
+spread = 0.0
+initial_velocity_min = 30.0
+initial_velocity_max = 30.0
+gravity = Vector3(0, 1, 0)
+linear_accel_min = 78.78
+linear_accel_max = 78.78
+tangential_accel_min = 4.0
+tangential_accel_max = 4.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_he8ve"]
+size = Vector2(64, 16)
+
+[node name="Level1" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+texture_repeat = 2
+position = Vector2(0, -144)
+texture = ExtResource("1_325xm")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 176, 320)
+
+[node name="Dunes" type="Sprite2D" parent="Background"]
+material = SubResource("ShaderMaterial_l8nj6")
+position = Vector2(0, 304)
+texture = ExtResource("2_ixgfm")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 272, 16)
+script = ExtResource("4_ptapr")
+scrolling = true
+speed = 0.1
+
+[node name="PalmTrees" type="Sprite2D" parent="Background"]
+material = SubResource("ShaderMaterial_h6kdr")
+position = Vector2(0, 304)
+texture = ExtResource("5_lrypa")
+centered = false
+script = ExtResource("4_ptapr")
+scrolling = true
+speed = 0.02
+
+[node name="Cactus" type="Sprite2D" parent="Background"]
+material = SubResource("ShaderMaterial_dlv05")
+position = Vector2(0, 288)
+texture = ExtResource("5_a17d4")
+centered = false
+script = ExtResource("4_ptapr")
+scrolling = true
+speed = 0.1
+
+[node name="CloudsBack" type="Sprite2D" parent="Background" groups=["pausables"]]
+process_mode = 3
+material = SubResource("ShaderMaterial_ni5h7")
+position = Vector2(256, 256)
+texture = ExtResource("6_phnxg")
+script = ExtResource("4_ptapr")
+scrolling = true
+speed = 0.005
+
+[node name="CloudsFront" type="Sprite2D" parent="Background" groups=["pausables"]]
+process_mode = 3
+material = SubResource("ShaderMaterial_ovumd")
+position = Vector2(256, 232)
+texture = ExtResource("6_xc1vj")
+script = ExtResource("4_ptapr")
+scrolling = true
+speed = 0.01
+
+[node name="SandParticles" type="GPUParticles2D" parent="." groups=["pausables"]]
+process_mode = 3
+position = Vector2(210, 168)
+process_material = SubResource("ParticleProcessMaterial_4iyv8")
+lifetime = 2.0
+preprocess = 10.0
+explosiveness = 0.2
+fixed_fps = 0
+script = ExtResource("8_072ta")
+
+[node name="Floor" parent="." node_paths=PackedStringArray("sprite_1", "sprite_2") instance=ExtResource("2_b8df3")]
+position = Vector2(0, -16)
+collision_layer = 2
+collision_mask = 2
+sprite_1 = NodePath("FloorSprite")
+sprite_2 = NodePath("FloorSprite2")
+
+[node name="FloorSprite" type="Sprite2D" parent="Floor"]
+texture_repeat = 2
+position = Vector2(0, 192)
+texture = ExtResource("1_nd7tx")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 208, 96)
+
+[node name="FloorSprite2" type="Sprite2D" parent="Floor"]
+texture_repeat = 2
+position = Vector2(208, 192)
+texture = ExtResource("1_nd7tx")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 208, 96)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+position = Vector2(32, 200)
+shape = SubResource("RectangleShape2D_he8ve")
+
+[node name="Objects" type="Node2D" parent="."]
+position = Vector2(0, -16)
+
+[node name="ObstacleSpawner" parent="Objects" instance=ExtResource("11_46f8q")]
+position = Vector2(208, 192)
+
+[node name="OriginalObstacleSpawner" parent="Objects" instance=ExtResource("2_gag1w")]
+position = Vector2(208, 192)
+node_scenes = Array[PackedScene]([ExtResource("3_kchot"), ExtResource("7_ooh14")])
+disabled = true
+spawn_delay_max = 2.0
+
+[node name="ParticleManager" parent="Objects" instance=ExtResource("13_bfis1")]
+
+[node name="Player" parent="Objects" instance=ExtResource("1_ensg2")]
+position = Vector2(32, 192)
+
+[node name="LevelSoundManager" parent="." instance=ExtResource("12_ptls3")]
+
+[node name="ScoreCounter" parent="." instance=ExtResource("12_k5rit")]
+
+[node name="MusicManager" parent="." instance=ExtResource("18_8jsjs")]
+streams = Array[AudioStream]([ExtResource("19_wi8jb")])
+loop = true
+max_volume = 0.25

@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://svwd65votjbb"]
+
+[ext_resource type="PackedScene" uid="uid://d3stlbsqmy77c" path="res://game.tscn" id="1_asw7d"]
+[ext_resource type="Script" path="res://classes/scene_manager.gd" id="2_ncox1"]
+[ext_resource type="PackedScene" uid="uid://l0sday255js0" path="res://ui/layouts/startup_screen/startup_screen.tscn" id="2_x1yu2"]
+
+[node name="Main" type="Node"]
+
+[node name="SceneManager" type="Node" parent="." node_paths=PackedStringArray("BlackOverlay")]
+script = ExtResource("2_ncox1")
+default_scene = ExtResource("2_x1yu2")
+scenes = {
+"game": ExtResource("1_asw7d"),
+"startup_scene": ExtResource("2_x1yu2")
+}
+BlackOverlay = NodePath("../CanvasLayer/ColorRect")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)

@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://ppntko5hn7kt"]
+
+[ext_resource type="Script" path="res://classes/randomized_sprite.gd" id="1_6m2yb"]
+[ext_resource type="PackedScene" uid="uid://fnuvdjxpqg0q" path="res://components/mob/hitbox/hitbox.tscn" id="1_n3ovl"]
+[ext_resource type="Texture2D" uid="uid://7m22cwa26caa" path="res://objects/cactus/cactus_0.png" id="1_p5t6b"]
+[ext_resource type="PackedScene" uid="uid://dbjwrlv5xdjwc" path="res://components/general/generic_motion/generic_motion.tscn" id="3_4ow2m"]
+[ext_resource type="Texture2D" uid="uid://c2bog368520k1" path="res://objects/cactus/cactus_1.png" id="3_chhva"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lb44f"]
+size = Vector2(8, 16)
+
+[node name="Cactus" type="Node2D"]
+
+[node name="RandomizedSprite" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("1_p5t6b")
+script = ExtResource("1_6m2yb")
+sprites = Array[Texture]([ExtResource("1_p5t6b"), ExtResource("3_chhva")])
+
+[node name="Hitbox" parent="." instance=ExtResource("1_n3ovl")]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_lb44f")
+
+[node name="GenericMotion" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_4ow2m")]
+target = NodePath("..")
+speed = 140
+direction = Vector2(-1, 0)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-4.76837e-07, -8.5)
+scale = Vector2(1.1, 0.85)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="queue_free"]

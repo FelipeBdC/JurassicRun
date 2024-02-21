@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cfo6ulnshtyxw"]
+
+[ext_resource type="Script" path="res://components/level/floor/floor.gd" id="1_naxnv"]
+
+[node name="Floor" type="StaticBody2D"]
+script = ExtResource("1_naxnv")

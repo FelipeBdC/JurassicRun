@@ -1,0 +1,71 @@
+[gd_scene load_steps=7 format=3 uid="uid://cubwynqn6sceh"]
+
+[ext_resource type="Texture2D" uid="uid://b62y6l0s30mtg" path="res://ui/theme/panel/panel_50.png" id="1_1iqjx"]
+[ext_resource type="Script" path="res://classes/max_size_container.gd" id="1_12nlo"]
+[ext_resource type="PackedScene" uid="uid://bjmixu1jjcw6q" path="res://ui/layouts/settings_menu/settings.tscn" id="3_5myo5"]
+[ext_resource type="PackedScene" uid="uid://xuhbuipoyd14" path="res://components/general/ui_changer/ui_changer.tscn" id="3_thi2t"]
+[ext_resource type="Script" path="res://classes/single_press_button.gd" id="4_lqg0i"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mif3v"]
+texture = ExtResource("1_1iqjx")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+region_rect = Rect2(0, 0, 8, 8)
+
+[node name="SettingsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_12nlo")
+max_size = Vector2(176, 192)
+original_size = Vector2(176, 176)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_mif3v")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="Settings" parent="VBoxContainer/PanelContainer/ScrollContainer" instance=ExtResource("3_5myo5")]
+layout_mode = 2
+
+[node name="ReturnButton" type="Button" parent="VBoxContainer" groups=["buttons"]]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+focus_mode = 0
+mouse_default_cursor_shape = 2
+text = "RETURN"
+icon_alignment = 1
+script = ExtResource("4_lqg0i")
+
+[node name="UIChanger" parent="VBoxContainer/ReturnButton" instance=ExtResource("3_thi2t")]
+interface_name = "main_menu"
+fade_in_speed = 0.2
+fade_out_speed = 0.2
+
+[connection signal="pressed" from="VBoxContainer/ReturnButton" to="VBoxContainer/ReturnButton/UIChanger" method="change_ui"]

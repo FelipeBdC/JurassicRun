@@ -1,0 +1,92 @@
+[gd_scene load_steps=6 format=3 uid="uid://dvtcwv8xabkjg"]
+
+[ext_resource type="Script" path="res://classes/max_size_container.gd" id="1_nh6nl"]
+[ext_resource type="PackedScene" uid="uid://xuhbuipoyd14" path="res://components/general/ui_changer/ui_changer.tscn" id="1_ybe8f"]
+[ext_resource type="Theme" uid="uid://bpr8ei474bn2u" path="res://ui/theme/red_theme.tres" id="3_52lsc"]
+[ext_resource type="Script" path="res://classes/single_press_button.gd" id="7_nprdq"]
+[ext_resource type="PackedScene" uid="uid://bni5t2mc1pv4r" path="res://components/general/scene_changer/scene_changer.tscn" id="7_p63mj"]
+
+[node name="ColorRect" type="ColorRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.45098)
+
+[node name="PauseMenu" type="Control" parent="."]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nh6nl")
+max_size = Vector2(176, 192)
+original_size = Vector2(176, 176)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PauseMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -50.0
+offset_right = 5.0
+offset_bottom = -38.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="PauseMenu/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+
+[node name="PausedLabel" type="Label" parent="PauseMenu/HBoxContainer/PanelContainer"]
+layout_mode = 2
+text = "PAUSED"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -48.0
+offset_right = 40.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ResumeButton" type="Button" parent="PauseMenu/VBoxContainer" groups=["buttons"]]
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+text = "RESUME"
+script = ExtResource("7_nprdq")
+
+[node name="UIChanger" parent="PauseMenu/VBoxContainer/ResumeButton" instance=ExtResource("1_ybe8f")]
+interface_name = "resume_delay"
+fading = false
+
+[node name="ExitButton" type="Button" parent="PauseMenu/VBoxContainer" groups=["buttons"]]
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme = ExtResource("3_52lsc")
+text = "EXIT"
+script = ExtResource("7_nprdq")
+
+[node name="SceneChanger" parent="PauseMenu/VBoxContainer/ExitButton" instance=ExtResource("7_p63mj")]
+scene_name = "game"
+
+[connection signal="pressed" from="PauseMenu/VBoxContainer/ResumeButton" to="PauseMenu/VBoxContainer/ResumeButton/UIChanger" method="change_ui"]
+[connection signal="pressed" from="PauseMenu/VBoxContainer/ExitButton" to="PauseMenu/VBoxContainer/ResumeButton" method="_on_pressed"]
+[connection signal="pressed" from="PauseMenu/VBoxContainer/ExitButton" to="PauseMenu/VBoxContainer/ExitButton/SceneChanger" method="change_scene"]

@@ -1,0 +1,82 @@
+[gd_scene load_steps=5 format=3 uid="uid://m8ngq0tr2cmi"]
+
+[ext_resource type="Script" path="res://ui/layouts/game_over_screen/game_over_screen.gd" id="1_mqkqy"]
+[ext_resource type="PackedScene" uid="uid://bni5t2mc1pv4r" path="res://components/general/scene_changer/scene_changer.tscn" id="2_3d01g"]
+[ext_resource type="Script" path="res://classes/single_press_button.gd" id="2_vlpml"]
+[ext_resource type="AudioStream" uid="uid://ctj3p5x77qnls" path="res://ui/sounds/game_over.ogg" id="3_kkflx"]
+
+[node name="GameOverScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_mqkqy")
+max_size = Vector2(176, 192)
+original_size = Vector2(176, 176)
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -50.0
+offset_right = 5.0
+offset_bottom = -38.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+
+[node name="GameOverLabel" type="Label" parent="HBoxContainer2/PanelContainer"]
+layout_mode = 2
+text = "GAME OVER"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Buttons" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -48.0
+offset_top = -48.0
+offset_right = 48.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 2
+
+[node name="Return Button" type="Button" parent="Buttons" groups=["buttons"]]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+text = "RETURN"
+script = ExtResource("2_vlpml")
+
+[node name="SceneChanger" parent="Buttons/Return Button" instance=ExtResource("2_3d01g")]
+scene_name = "game"
+fade_in_speed = 0.5
+fade_out_speed = 0.5
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_kkflx")
+volume_db = -4.0
+autoplay = true
+bus = &"Music"
+
+[connection signal="ready" from="." to="." method="_on_ready"]
+[connection signal="pressed" from="Buttons/Return Button" to="Buttons/Return Button/SceneChanger" method="change_scene"]

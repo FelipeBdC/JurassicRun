@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://bo8ukxr6krqtg"]
+
+[ext_resource type="Script" path="res://ui/ui_manager.gd" id="1_0qohg"]
+
+[node name="UIManager" type="Control" node_paths=PackedStringArray("current_interface_container")]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_0qohg")
+current_interface_container = NodePath("CurrentInterface")
+
+[node name="CurrentInterface" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
