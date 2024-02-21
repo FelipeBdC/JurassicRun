@@ -1,5 +1,5 @@
 ## About Jurassic Run
-Jurassic Run is a small passion project I had, my main goal was to create a very clean project in Godot, using recently learned and previous knowledge.
+Jurassic Run is a small passion project I had, my main goal was to create a very clean project in Godot using my previous knowledge with the engine.
 
 <p align="center" width="100%">
     <img width="100%" src="screenshots/banner.png"> 
