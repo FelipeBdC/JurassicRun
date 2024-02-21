@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://ct1g66kcjy83q" path="res://ui/layouts/main_menu/logo.png" id="1_8h3ep"]
 [ext_resource type="PackedScene" uid="uid://cy3ytowwb64wf" path="res://components/general/event_emitter/event_emitter.tscn" id="1_alqdb"]
 [ext_resource type="Script" path="res://classes/max_size_container.gd" id="1_l1e24"]
-[ext_resource type="PackedScene" uid="uid://deufl4xxh6oha" path="res://components/ui/highscore_label/highscore_label.tscn" id="3_hv0ho"]
+[ext_resource type="PackedScene" uid="uid://deufl4xxh6oha" path="res://components/ui/score_label/score_label.tscn" id="3_hv0ho"]
 [ext_resource type="PackedScene" uid="uid://xuhbuipoyd14" path="res://components/general/ui_changer/ui_changer.tscn" id="4_behod"]
 [ext_resource type="Theme" uid="uid://bpr8ei474bn2u" path="res://ui/theme/red_theme.tres" id="5_hqh7b"]
 [ext_resource type="Script" path="res://classes/single_press_button.gd" id="8_gn5gf"]
@@ -38,7 +38,7 @@ mouse_filter = 2
 texture = ExtResource("1_8h3ep")
 stretch_mode = 3
 
-[node name="HighscoreLabel" parent="VBoxContainer" instance=ExtResource("3_hv0ho")]
+[node name="HighcoreLabel" parent="VBoxContainer" instance=ExtResource("3_hv0ho")]
 layout_mode = 2
 
 [node name="Buttons" type="VBoxContainer" parent="."]
