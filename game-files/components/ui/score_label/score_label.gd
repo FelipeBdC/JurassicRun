@@ -12,7 +12,7 @@ func _ready() -> void:
 		"highscore":
 			score_label.text = str(Save.get_save_data("highscore"))
 		"score":
-			score_label.text = Game.score
+			score_label.text = str(Game.score)
 	
 	
 func cookies_not_allowed() -> void:

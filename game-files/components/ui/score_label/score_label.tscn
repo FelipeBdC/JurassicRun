@@ -8,6 +8,7 @@
 [node name="ScoreLabel" type="PanelContainer" node_paths=PackedStringArray("score_label")]
 size_flags_horizontal = 4
 script = ExtResource("1_jvmxb")
+score_type = null
 score_label = NodePath("HBoxContainer/Label")
 red_theme = ExtResource("3_md6ui")
 
