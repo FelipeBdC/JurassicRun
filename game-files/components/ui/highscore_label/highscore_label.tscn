@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://deufl4xxh6oha"]
+
+[ext_resource type="Texture2D" uid="uid://b851bq7kswhj5" path="res://ui/theme/icons/trophy.png" id="1_er0ft"]
+[ext_resource type="Script" path="res://ui/layouts/main_menu/highscore_label.gd" id="2_ajlom"]
+[ext_resource type="Theme" uid="uid://bpr8ei474bn2u" path="res://ui/theme/red_theme.tres" id="3_md6ui"]
+
+[node name="HighscoreLabel" type="PanelContainer"]
+size_flags_horizontal = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_er0ft")
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "129"
+script = ExtResource("2_ajlom")
+red_theme = ExtResource("3_md6ui")
