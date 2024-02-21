@@ -5,6 +5,7 @@ extends PanelContainer
 @export_category("Script Exports")
 @export var score_label: Label
 @export var red_theme: Theme
+@export var icon: TextureRect
 
 
 func _ready() -> void:
@@ -13,6 +14,7 @@ func _ready() -> void:
 			score_label.text = str(Save.get_save_data("highscore"))
 		"score":
 			score_label.text = str(Game.score)
+			icon.visible = false
 	
 	
 func cookies_not_allowed() -> void:
