@@ -1,10 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://pofxnk2fs0qy"]
+[gd_scene load_steps=9 format=3 uid="uid://pofxnk2fs0qy"]
 
 [ext_resource type="Texture2D" uid="uid://ct1g66kcjy83q" path="res://ui/layouts/main_menu/logo.png" id="1_8h3ep"]
 [ext_resource type="PackedScene" uid="uid://cy3ytowwb64wf" path="res://components/general/event_emitter/event_emitter.tscn" id="1_alqdb"]
 [ext_resource type="Script" path="res://classes/max_size_container.gd" id="1_l1e24"]
-[ext_resource type="Texture2D" uid="uid://b851bq7kswhj5" path="res://ui/theme/icons/trophy.png" id="2_mh8yr"]
-[ext_resource type="Script" path="res://ui/layouts/main_menu/highscore_label.gd" id="3_0egrc"]
+[ext_resource type="PackedScene" uid="uid://deufl4xxh6oha" path="res://components/ui/score_label/score_label.tscn" id="3_hv0ho"]
 [ext_resource type="PackedScene" uid="uid://xuhbuipoyd14" path="res://components/general/ui_changer/ui_changer.tscn" id="4_behod"]
 [ext_resource type="Theme" uid="uid://bpr8ei474bn2u" path="res://ui/theme/red_theme.tres" id="5_hqh7b"]
 [ext_resource type="Script" path="res://classes/single_press_button.gd" id="8_gn5gf"]
@@ -39,25 +38,8 @@ mouse_filter = 2
 texture = ExtResource("1_8h3ep")
 stretch_mode = 3
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+[node name="HighcoreLabel" parent="VBoxContainer" instance=ExtResource("3_hv0ho")]
 layout_mode = 2
-size_flags_horizontal = 4
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer"]
-layout_mode = 2
-theme_override_constants/separation = 4
-alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/PanelContainer/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("2_mh8yr")
-
-[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/HBoxContainer" node_paths=PackedStringArray("panel")]
-layout_mode = 2
-text = "129"
-script = ExtResource("3_0egrc")
-red_theme = ExtResource("5_hqh7b")
-panel = NodePath("../..")
 
 [node name="Buttons" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -107,5 +89,4 @@ fade_out_speed = 0.2
 [connection signal="pressed" from="Buttons/StartButton" to="Buttons/SettingsButton" method="_on_pressed"]
 [connection signal="pressed" from="Buttons/SettingsButton" to="Buttons/StartButton" method="_on_pressed"]
 [connection signal="pressed" from="Buttons/SettingsButton" to="Buttons/SettingsButton/UIChanger" method="change_ui"]
-[connection signal="cookies_not_allowed" from="CookieDetector" to="VBoxContainer/PanelContainer/HBoxContainer/Label" method="cookies_not_allowed"]
 [connection signal="cookies_not_allowed" from="CookieDetector" to="Buttons/SettingsButton" method="set_disabled" binds= [true]]
