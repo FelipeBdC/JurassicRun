@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://m8ngq0tr2cmi"]
+[gd_scene load_steps=6 format=3 uid="uid://m8ngq0tr2cmi"]
 
 [ext_resource type="Script" path="res://ui/layouts/game_over_screen/game_over_screen.gd" id="1_mqkqy"]
 [ext_resource type="PackedScene" uid="uid://bni5t2mc1pv4r" path="res://components/general/scene_changer/scene_changer.tscn" id="2_3d01g"]
+[ext_resource type="PackedScene" uid="uid://deufl4xxh6oha" path="res://components/ui/score_label/score_label.tscn" id="2_uxorv"]
 [ext_resource type="Script" path="res://classes/single_press_button.gd" id="2_vlpml"]
 [ext_resource type="AudioStream" uid="uid://ctj3p5x77qnls" path="res://ui/sounds/game_over.ogg" id="3_kkflx"]
 
@@ -18,7 +19,7 @@ max_size = Vector2(176, 192)
 original_size = Vector2(176, 176)
 metadata/_edit_use_anchors_ = true
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+[node name="HBoxContainer2" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -43,6 +44,11 @@ layout_mode = 2
 text = "GAME OVER"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="ScoreLabel" parent="HBoxContainer2" instance=ExtResource("2_uxorv")]
+layout_mode = 2
+size_flags_horizontal = 1
+score_type = "score"
 
 [node name="Buttons" type="VBoxContainer" parent="."]
 layout_mode = 1
