@@ -10,9 +10,9 @@ extends PanelContainer
 func _ready() -> void:
 	match score_type:
 		"highscore":
-			self.text = str(Save.get_save_data("highscore"))
+			score_label.text = str(Save.get_save_data("highscore"))
 		"score":
-			self.text = Game.score
+			score_label.text = Game.score
 	
 	
 func cookies_not_allowed() -> void:

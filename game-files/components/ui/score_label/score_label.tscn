@@ -5,9 +5,11 @@
 [ext_resource type="Script" path="res://ui/layouts/main_menu/highscore_label.gd" id="2_ajlom"]
 [ext_resource type="Theme" uid="uid://bpr8ei474bn2u" path="res://ui/theme/red_theme.tres" id="3_md6ui"]
 
-[node name="ScoreLabel" type="PanelContainer"]
+[node name="ScoreLabel" type="PanelContainer" node_paths=PackedStringArray("score_label")]
 size_flags_horizontal = 4
 script = ExtResource("1_jvmxb")
+score_label = NodePath("HBoxContainer/Label")
+red_theme = ExtResource("3_md6ui")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
