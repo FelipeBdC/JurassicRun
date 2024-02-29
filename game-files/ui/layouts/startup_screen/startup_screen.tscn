@@ -1,5 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://l0sday255js0"]
+[gd_scene load_steps=8 format=3 uid="uid://l0sday255js0"]
 
+[ext_resource type="Script" path="res://ui/layouts/startup_screen/loader.gd" id="1_7qhoa"]
+[ext_resource type="Script" path="res://ui/layouts/startup_screen/animation_player.gd" id="1_h21er"]
 [ext_resource type="PackedScene" uid="uid://bni5t2mc1pv4r" path="res://components/general/scene_changer/scene_changer.tscn" id="1_o3bpp"]
 [ext_resource type="AudioStream" uid="uid://irlgepn808id" path="res://ui/sounds/reach_score_target.ogg" id="2_4q76y"]
 
@@ -40,12 +42,9 @@ tracks/1/path = NodePath("SceneChanger")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(2),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"change_scene"
-}]
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -97,9 +96,17 @@ libraries = {
 "": SubResource("AnimationLibrary_ajqbk")
 }
 autoplay = "start"
+script = ExtResource("1_h21er")
+
+[node name="Loader" type="Node" parent="."]
+script = ExtResource("1_7qhoa")
+file_path = "res://game.tscn"
 
 [node name="SceneChanger" parent="." instance=ExtResource("1_o3bpp")]
 scene_name = "game"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_4q76y")
+
+[connection signal="sequence_finished" from="AnimationPlayer" to="SceneChanger" method="change_scene"]
+[connection signal="loaded" from="Loader" to="AnimationPlayer" method="_on_loader_loaded"]
